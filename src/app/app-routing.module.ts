@@ -11,6 +11,10 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'track',
+    loadChildren: () => import('./track/track.module').then( m => m.TrackPageModule)
+  }
 ];
 
 @NgModule({

@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-back-button slot="start" (click)="goBackToTrackOverview()">Back</ion-back-button>
+    <ion-title>{{ play.name }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-button (click)="togglePlayPause()" fill="clear" expand="block">
+      <ion-icon class="playIconSize" [name]="!isPlaying ? 'play-circle-outline' : 'pause-circle-outline'"></ion-icon>
+    </ion-button>
+    <ion-range #durationRange [(ngModel)]="progress" style="width: 100%;" class="volumeRange" min="0" max="100" (touchend)="seek()" (mouseup)="seek()"></ion-range>
+  </ion-toolbar>
+  <ion-list>
+    <ion-list-header>
+      <ion-label>Verfügbare Spuren</ion-label>
+    </ion-list-header>  
+    <ion-item slot="start" *ngFor="let track of play.tracks">
+      <ion-label position="fixed">
+        {{ track.name }}
+      </ion-label>
+      <ion-range class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track)"></ion-range>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,5 +1,7 @@
 {
   "name": "PlayalongApp",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
