@@ -16,11 +16,71 @@
     <ion-list-header>
       <ion-label>Verfügbare Spuren</ion-label>
     </ion-list-header>  
-    <ion-item slot="start" *ngFor="let track of play.tracks">
+    <!-- <ion-item slot="start" *ngFor="let track of play.tracks">
       <ion-label position="fixed">
         {{ track.name }}
       </ion-label>
       <ion-range class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track)"></ion-range>
+    </ion-item> -->
+    <ion-item slot="start" *ngIf="track_0 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[0].name }}
+      </ion-label>
+      <ion-range #volumeRange_0 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_0, volumeRange_0)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_1 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[1].name }}
+      </ion-label>
+      <ion-range #volumeRange_1 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_1, volumeRange_1)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_2 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[2].name }}
+      </ion-label>
+      <ion-range #volumeRange_2 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_2, volumeRange_2)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_3 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[3].name }}
+      </ion-label>
+      <ion-range #volumeRange_3 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_3, volumeRange_3)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_4 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[4].name }}
+      </ion-label>
+      <ion-range #volumeRange_4 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_4, volumeRange_4)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_5 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[5].name }}
+      </ion-label>
+      <ion-range #volumeRange_5 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_5, volumeRange_5)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_6 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[6].name }}
+      </ion-label> 
+      <ion-range #volumeRange_6 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_6, volumeRange_6)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_7 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[7].name }}
+      </ion-label>
+      <ion-range #volumeRange_7 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_7, volumeRange_7)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_8 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[8].name }}
+      </ion-label>
+      <ion-range #volumeRange_8 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_8, volumeRange_8)"></ion-range>
+    </ion-item>
+    <ion-item slot="start" *ngIf="track_9 != null">
+      <ion-label position="fixed">
+        {{ this.play.tracks[9].name }}
+      </ion-label>
+      <ion-range #volumeRange_9 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_9, volumeRange_9)"></ion-range>
     </ion-item>
   </ion-list>
 </ion-content>

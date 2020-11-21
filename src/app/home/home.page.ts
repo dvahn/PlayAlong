@@ -15,7 +15,6 @@ export interface Track {
   type: string;
 }
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -24,6 +23,9 @@ export interface Track {
 
 export class HomePage {
 
+  // TODO:
+  // - Pfade dynamisch laden (Datenbank?)
+  
   allPlays: Play[] = [
     {
       name: 'Practice Play',
@@ -66,13 +68,11 @@ export class HomePage {
       path: './assets/plays/play_2',
       tracks: []
     }
-
   ]
 
   constructor(private router: Router) {}
 
   ngOnInit() {
-    // this.allPlays = this.playLoaderService.displayAllPlays();
   }
 
   goToTrackView(selectedPlay) {
@@ -82,9 +82,7 @@ export class HomePage {
         play: selectedPlay,
       }
     }
-
     this.router.navigate(['/track'], navExtras)
   }
-
-
+  
 }
