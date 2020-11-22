@@ -1,7 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Howl } from 'howler';
-import { IonRange, Platform } from '@ionic/angular';
+import { IonRange, LoadingController, Platform } from '@ionic/angular';
+import { interval, Subscription } from 'rxjs';
 
 export interface Track {
   name: string;
@@ -25,6 +26,10 @@ export class TrackPage implements OnInit {
   play: Play;
   tracks: Howl[];
   progress = 0;
+  private loading;
+  private subscription: Subscription;
+  private lastTrack;
+
   @ViewChild('durationRange', { static: false }) durationRange: IonRange;
   @ViewChild('volumeRange_0', { static: false }) volumeRange_0: IonRange;
   @ViewChild('volumeRange_1', { static: false }) volumeRange_1: IonRange;
@@ -48,7 +53,7 @@ export class TrackPage implements OnInit {
   track_8: Howl = null;
   track_9: Howl = null; 
 
-  constructor(private route: ActivatedRoute ,private router: Router, private plt: Platform) { 
+  constructor(private route: ActivatedRoute, private router: Router, private plt: Platform, private loadingController: LoadingController) { 
     this.route.queryParams.subscribe(params => {
       if(this.router.getCurrentNavigation().extras.state){
         this.play = this.router.getCurrentNavigation().extras.state.play;
@@ -65,8 +70,6 @@ export class TrackPage implements OnInit {
   }
 
   // TODO: 
-  // - Ladeanzeige bei switch auf Tracks-Seite
-  // - Volume-Regler an einzelnen Tracks
   // - Replay-Button
 
   setUpTracks() {
@@ -133,19 +136,58 @@ export class TrackPage implements OnInit {
       });
     }
     this.tracks = [this.track_0, this.track_1, this.track_2, this.track_3, this.track_4, this.track_5, this.track_6, this.track_7, this.track_8, this.track_9];
+    
+    this.lastTrack = this.getLastTrack();
+
+    this.loadingController.create({
+      message: 'Loading tracks...'
+    }).then(loading => {
+      this.loading = loading; 
+      this.loading.present();
+    });
+    
+    this.subscription = interval(1000).subscribe( () => {   
+      if(this.lastTrack.state() == "loaded") {
+        this.loading.dismiss();
+        this.subscription.unsubscribe();
+      } else {
+        0; 
+      }
+    });
   }
 
   togglePlayPause() {
     this.isPlaying = !this.isPlaying;
 
     if(this.isPlaying) {
-      for(let i = 0; i<this.tracks.length; i++) {
-        this.tracks[i] ? this.tracks[i].play() : 0;
-      }
+      // for(let i = 0; i<this.tracks.length; i++) {
+      //   this.tracks[i] ? this.tracks[i].play() : 0;
+      // }
+      this.tracks[0] ? this.tracks[0].play() : 0;
+      this.tracks[1] ? this.tracks[1].play() : 0;
+      this.tracks[2] ? this.tracks[2].play() : 0;
+      this.tracks[3] ? this.tracks[3].play() : 0;
+      this.tracks[4] ? this.tracks[4].play() : 0;
+      this.tracks[5] ? this.tracks[5].play() : 0;
+      this.tracks[6] ? this.tracks[6].play() : 0;
+      this.tracks[7] ? this.tracks[7].play() : 0;
+      this.tracks[8] ? this.tracks[8].play() : 0;
+      this.tracks[9] ? this.tracks[9].play() : 0;
+      
     } else {
-      for(let i = 0; i<this.tracks.length; i++) {
-        this.tracks[i] ? this.tracks[i].pause() : 0;
-      }
+      // for(let i = 0; i<this.tracks.length; i++) {
+      //   this.tracks[i] ? this.tracks[i].pause() : 0;
+      // }
+      this.tracks[0] ? this.tracks[0].pause() : 0;
+      this.tracks[1] ? this.tracks[1].pause() : 0;
+      this.tracks[2] ? this.tracks[2].pause() : 0;
+      this.tracks[3] ? this.tracks[3].pause() : 0;
+      this.tracks[4] ? this.tracks[4].pause() : 0;
+      this.tracks[5] ? this.tracks[5].pause() : 0;
+      this.tracks[6] ? this.tracks[6].pause() : 0;
+      this.tracks[7] ? this.tracks[7].pause() : 0;
+      this.tracks[8] ? this.tracks[8].pause() : 0;
+      this.tracks[9] ? this.tracks[9].pause() : 0;
     }
   }
  
@@ -168,6 +210,18 @@ export class TrackPage implements OnInit {
   changeTrackVolume(track, volumeRange){
     let newValue = +volumeRange.value;
     track.volume(newValue / 100);
+  }
+
+  getLastTrack() {
+    let lastTrack;
+    for(let track of this.tracks) {
+      if(track == null) {
+        return lastTrack;
+      } else {
+        lastTrack = track;
+      }
+    }
+    return lastTrack;
   }
 
 }
