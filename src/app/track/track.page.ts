@@ -65,6 +65,13 @@ export class TrackPage implements OnInit {
     this.setUpTracks();
   }
 
+  // Stop music when leaving track page
+  ionViewDidLeave(){
+    for(let i = 0; i<this.tracks.length; i++) {
+      this.tracks[i] ? this.tracks[i].stop() : 0;
+    }
+  }
+
   goBackToTrackOverview() {
     this.router.navigate(['/home'])
   }

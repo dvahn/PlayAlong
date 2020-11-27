@@ -7,8 +7,8 @@
 
 <ion-content>
   <ion-toolbar>
-    <ion-button (click)="togglePlayPause()" fill="clear" expand="block">
-      <ion-icon class="playIconSize" [name]="!isPlaying ? 'play-circle-outline' : 'pause-circle-outline'"></ion-icon>
+    <ion-button (click)="togglePlayPause()" fill="clear" expand="block" fill="clear">
+      <ion-icon slot="icon-only" class="playIconSize" [name]="!isPlaying ? 'play-circle-outline' : 'pause-circle-outline'"></ion-icon>
     </ion-button>
     <ion-range #durationRange [(ngModel)]="progress" style="width: 100%;" class="volumeRange" min="0" max="100" (touchend)="seek()" (mouseup)="seek()"></ion-range>
   </ion-toolbar>
