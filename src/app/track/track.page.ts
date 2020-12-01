@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Howl } from 'howler';
 import { IonRange, LoadingController, Platform } from '@ionic/angular';
 import { interval, Subscription } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 export interface Track {
   name: string;
@@ -21,6 +22,8 @@ export interface Play {
   styleUrls: ['./track.page.scss'],
 })
 export class TrackPage implements OnInit {
+
+  tracksExample: Observable<Track>[];
 
   isPlaying: Boolean = false;
   play: Play;

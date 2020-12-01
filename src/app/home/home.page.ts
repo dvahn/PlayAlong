@@ -39,6 +39,7 @@ export class HomePage {
 
   playsFromDB: Observable<Play[]>;
   
+  
   allPlays: Play[] = [
     {
       name: 'Practice Play',
@@ -93,7 +94,7 @@ export class HomePage {
   
     let navExtras: NavigationExtras = {
       state: {
-        play: selectedPlay,
+        play: selectedPlay
       }
     }
     this.router.navigate(['/track'], navExtras)

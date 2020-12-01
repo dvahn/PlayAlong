@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, DocumentReference } from '@angular/fire/firestore';
 import { map, take } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 export interface Play {
   name: string;
@@ -25,11 +26,23 @@ export class DatabaseService {
 
   constructor(private afs: AngularFirestore) { 
     this.playCollection = this.afs.collection<Play>('Plays');
-    this.plays = this.playCollection.valueChanges();
+    this.plays = this.playCollection.snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      })
+    );
     
   }
 
   getPlays(): Observable<Play[]> {
     return this.plays;
+  }
+
+  getTracks(id): Observable<Track[]> {
+    return this.afs.collection<Track>('Plays/'+id+'/tracks').valueChanges();;
   }
 }
