@@ -58,16 +58,16 @@ export class HomePage {
         }
       ]
     },
-    {
-      name: 'play_1',
-      path: './assets/plays/play_1',
-      tracks: []
-    },
-    {
-      name: 'play_2',
-      path: './assets/plays/play_2',
-      tracks: []
-    }
+    // {
+    //   name: 'play_1',
+    //   path: './assets/plays/play_1',
+    //   tracks: []
+    // },
+    // {
+    //   name: 'play_2',
+    //   path: './assets/plays/play_2',
+    //   tracks: []
+    // }
   ]
 
   constructor(private router: Router) {}
