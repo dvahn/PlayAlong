@@ -13,10 +13,15 @@ import { FileOpener } from '@ionic-native/file-opener/ngx';
 import { IonicStorageModule } from '@ionic/storage';
 import { HTTP } from '@ionic-native/http/ngx';
 
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment';
+import { AngularFirestoreModule, SETTINGS } from '@angular/fire/firestore'
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot()],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, IonicStorageModule.forRoot(), 
+    AngularFireModule.initializeApp(environment.firebase)],
 providers: [
     StatusBar,
     SplashScreen,
