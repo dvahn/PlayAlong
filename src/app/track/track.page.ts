@@ -4,6 +4,7 @@ import { Howl } from 'howler';
 import { IonRange, LoadingController, Platform } from '@ionic/angular';
 import { interval, Subscription } from 'rxjs';
 import { Observable } from 'rxjs/Observable';
+import { DatabaseService } from '../services/database.service';
 
 export interface Track {
   name: string;
@@ -28,6 +29,7 @@ export class TrackPage implements OnInit {
   isPlaying: Boolean = false;
   play: Play;
   tracks: Howl[];
+  db_tracks: Observable<Track[]>;
   progress = 0;
   private loading;
   private subscription: Subscription;
@@ -56,7 +58,7 @@ export class TrackPage implements OnInit {
   track_8: Howl = null;
   track_9: Howl = null; 
 
-  constructor(private route: ActivatedRoute, private router: Router, private plt: Platform, private loadingController: LoadingController) { 
+  constructor(private route: ActivatedRoute, private router: Router, private plt: Platform, private loadingController: LoadingController, private databaseService: DatabaseService) { 
     this.route.queryParams.subscribe(params => {
       if(this.router.getCurrentNavigation().extras.state){
         this.play = this.router.getCurrentNavigation().extras.state.play;
@@ -65,7 +67,8 @@ export class TrackPage implements OnInit {
   }
 
   ngOnInit() {
-    this.setUpTracks();
+    this.loadTracks();
+    // this.setUpTracks();
   }
 
   // Stop music when leaving track page
@@ -73,6 +76,11 @@ export class TrackPage implements OnInit {
     for(let i = 0; i<this.tracks.length; i++) {
       this.tracks[i] ? this.tracks[i].stop() : 0;
     }
+  }
+
+  loadTracks() {
+    this.db_tracks = this.databaseService.getTracks(this.play);
+    console.log(this.db_tracks);
   }
 
   goBackToTrackOverview() {

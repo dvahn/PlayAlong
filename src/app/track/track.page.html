@@ -22,7 +22,10 @@
       </ion-label>
       <ion-range class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track)"></ion-range>
     </ion-item> -->
-    <ion-item slot="start" *ngIf="track_0 != null">
+    <ion-item slot="start" *ngFor="let track of (db_tracks | async)">
+      <ion-label>{{ track.name }}</ion-label>
+    </ion-item>
+    <!-- <ion-item slot="start" *ngIf="track_0 != null">
       <ion-label position="fixed">
         {{ this.play.tracks[0].name }}
       </ion-label>
@@ -81,6 +84,6 @@
         {{ this.play.tracks[9].name }}
       </ion-label>
       <ion-range #volumeRange_9 class="volumeRange" slot="end" min="0" max="100" value="50" color="secondary" (ionChange)="changeTrackVolume(track_9, volumeRange_9)"></ion-range>
-    </ion-item>
+    </ion-item> -->
   </ion-list>
 </ion-content>

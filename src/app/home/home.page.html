@@ -21,7 +21,7 @@
   </ion-list>
   <p>-------------------</p>
   <ion-list>
-    <ion-item *ngFor="let play of (playsFromDB | async)">
+    <ion-item button (click)="goToTrackView(play)" *ngFor="let play of (playsFromDB | async)">
       {{ play.name }}
     </ion-item>
   </ion-list>

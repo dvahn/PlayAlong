@@ -43,6 +43,16 @@ export class DatabaseService {
   }
 
   getTracks(id): Observable<Track[]> {
-    return this.afs.collection<Track>('Plays/'+id+'/tracks').valueChanges();;
-  }
+    let tracks: Observable<Track[]>;
+    tracks = this.afs.collection<Track>('Plays/'+id+'/tracks').snapshotChanges().pipe(
+      map(actions => {
+        return actions.map(a => {
+          const data = a.payload.doc.data();
+          const id = a.payload.doc.id;
+          return { id, ...data };
+        })
+      })
+    );
+    return tracks;
+  } 
 }
